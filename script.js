@@ -1,8 +1,12 @@
 const escolha = document.getElementById("escolha");
+if (escolha === 1) {
+    const URL_BASE = "https://opentdb.com/api.php?amount=10&category=28";
+} else if (escolha === 2) {
+    const URL_BASE = "https://opentdb.com/api.php?amount=10&category=22";
+} else if (escolha === 3) {
+    const URL_BASE = "https://opentdb.com/api.php?amount=10&category=27";
+}
 
-
-
-const URL_BASE = "https://opentdb.com/api.php?amount=5";
 const URL_BASE_TRADUTOR = "https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl=pt-br&q="
 
 const traslateText = async (txt) => {
