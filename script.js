@@ -96,6 +96,11 @@ const fetchTrivia = async (url) => {
 
             await new Promise(resolve => {
                 const allButons = answerElement.querySelectorAll('button');
+                // buttonElement.innerText = await traslateText(decodeURIComponent(answer));
+                // buttonElement.classList.add('trivia-button'); // Adiciona a classe
+                // answerElement.appendChild(buttonElement);
+
+
                 allButons.forEach((b) => b.addEventListener('click', (e) => {
                     console.log(e);
 
@@ -117,7 +122,7 @@ const fetchTrivia = async (url) => {
 
     } catch (error) {
         console.error('Error fetching trivia: ', error);
-        // fetchTrivia(url);       
+        fetchTrivia(url);       
     }
 }
 escolha()
