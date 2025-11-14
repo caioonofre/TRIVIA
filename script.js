@@ -46,6 +46,11 @@ const escolhaDificuldade = async () => {
         // };}
     );
     triviaElement.innerHTML = '';
+    const gatoBeleza = document.createElement('img');
+    gatoBeleza.src = "gatoBeleza.jpg"
+    gatoBeleza.alt = 'gato dando beleza';
+    gatoBeleza.width = 200;
+    triviaElement.appendChild(gatoBeleza);
     await fetchTrivia(URL_BASE);
 }
 
@@ -118,11 +123,18 @@ const fetchTrivia = async (url) => {
 
         const resultElement = document.createElement('div');
         resultElement.innerHTML = `<h4>Você acertou ${correctAnswer}/5! </h4>`;
+        
+        const gatosilencio = document.createElement('img');
+        gatosilencio.src = "gatosilencio.jpg"
+        gatosilencio.alt = 'gato xiu';
+        gatosilencio.width = 500;
         triviaElement.appendChild(resultElement);
-
+        triviaElement.appendChild(gatosilencio);
+        
     } catch (error) {
         console.error('Error fetching trivia: ', error);
-        fetchTrivia(url);       
+        // fetchTrivia(url);
     }
 }
+
 escolha()
