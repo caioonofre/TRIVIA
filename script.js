@@ -1,13 +1,48 @@
-const escolha = document.getElementById("escolha");
-if (escolha === 1) {
-    const URL_BASE = "https://opentdb.com/api.php?amount=10&category=28";
-} else if (escolha === 2) {
-    const URL_BASE = "https://opentdb.com/api.php?amount=10&category=22";
-} else if (escolha === 3) {
-    const URL_BASE = "https://opentdb.com/api.php?amount=10&category=27";
+let URL_BASE;
+const URL_BASE_TRADUTOR = "https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl=pt-br&q="
+const triviaElement = document.getElementById("trivia-container");
+
+
+
+const escolha = async () => {
+    await new Promise(res => {
+        const input = document.getElementById("escolhatema");
+        input.onkeyup = (event) => {
+            if (event.key.toLowerCase() === "enter") {
+                if (input.value === 1) {
+                    URL_BASE = "https://opentdb.com/api.php?amount=5&category=28&difficulty=";                    
+                } else if (input.value === 2) {
+                    URL_BASE = "https://opentdb.com/api.php?amount=5&category=22&difficulty=";
+                } else {
+                    URL_BASE = "https://opentdb.com/api.php?amount=5&category=27&difficulty=";
+                }
+                res();
+            }
+        };
+    });
+    await escolhaDificuldade();
 }
 
-const URL_BASE_TRADUTOR = "https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl=pt-br&q="
+const escolhaDificuldade = async () => {
+    await new Promise(res => {
+        const input = document.getElementById("escolhadificuldade");
+        input.onkeyup = (event) => {
+            if (event.key.toLowerCase() === "enter") {
+                if (input.value === 1) {
+                    URL_BASE+"easy"
+                } else if (input.value === 2) {
+                    URL_BASE+"medium";
+                } else {
+                    URL_BASE+"hard";
+                }
+                res();
+            }
+        };
+    });
+    triviaElement.innerHTML = '';
+    await fetchTrivia(URL_BASE);
+}
+
 
 const traslateText = async (txt) => {
     try {
@@ -26,7 +61,6 @@ const fetchTrivia = async (url) => {
         let data = await fetch(url);
         data = await data.json();
         
-        const triviaElement = document.getElementById("trivia-container");
         triviaElement.innerHTML = '';
         
         for (const question of data.results.values()) {
@@ -56,7 +90,9 @@ const fetchTrivia = async (url) => {
 
             await new Promise(resolve => {
                 const allButons = answerElement.querySelectorAll('button');
-                allButons.forEach((b) => b.addEventListener('click', () => {
+                allButons.forEach((b) => b.addEventListener('click', (e) => {
+                    console.log(e);
+                    
                     if(b.innerText === translatedRightAnswer) {
                         alert("Correto");
                         correctAnswer++;
@@ -78,5 +114,4 @@ const fetchTrivia = async (url) => {
         // fetchTrivia(url);       
     }
 } 
-
-fetchTrivia(URL_BASE);
+escolha()
