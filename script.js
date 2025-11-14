@@ -29,14 +29,17 @@ const escolhaDificuldade = async () => {
         // inputDificulade.onkeyup = (event) => {
         // if (event.key.toLowerCase() === "enter") {
         if (inputDificulade.value == 1) {
-            URL_BASE + "easy"
-            console.log(URL_BASE)
+            const difficulty = "easy";
+            URL_BASE + difficulty;
+            console.log(URL_BASE);
         } else if (inputDificulade.value == 2) {
-            URL_BASE + "medium";
-            console.log(URL_BASE)
+            const difficulty = "medium";
+            URL_BASE + difficulty;
+            console.log(URL_BASE);
         } else {
-            URL_BASE + "hard";
-            console.log(URL_BASE)
+            const difficulty = "hard";
+            URL_BASE + difficulty;
+            console.log(URL_BASE);
         }
         res();
     }
