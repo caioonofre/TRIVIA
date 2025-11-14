@@ -6,12 +6,12 @@ const triviaElement = document.getElementById("trivia-container");
 
 const escolha = async () => {
     await new Promise(res => {
-        const input = document.getElementById("escolhatema");
-        input.onkeyup = (event) => {
+        const inputTema = document.getElementById("escolhatema");
+        inputTema.onkeyup = (event) => {
             if (event.key.toLowerCase() === "enter") {
-                if (input.value === 1) {
-                    URL_BASE = "https://opentdb.com/api.php?amount=5&category=28&difficulty=";                    
-                } else if (input.value === 2) {
+                if (inputTema.value == 1) {
+                    URL_BASE = "https://opentdb.com/api.php?amount=5&category=28&difficulty=";
+                } else if (inputTema.value == 2) {
                     URL_BASE = "https://opentdb.com/api.php?amount=5&category=22&difficulty=";
                 } else {
                     URL_BASE = "https://opentdb.com/api.php?amount=5&category=27&difficulty=";
@@ -25,20 +25,23 @@ const escolha = async () => {
 
 const escolhaDificuldade = async () => {
     await new Promise(res => {
-        const input = document.getElementById("escolhadificuldade");
-        input.onkeyup = (event) => {
-            if (event.key.toLowerCase() === "enter") {
-                if (input.value === 1) {
-                    URL_BASE+"easy"
-                } else if (input.value === 2) {
-                    URL_BASE+"medium";
-                } else {
-                    URL_BASE+"hard";
-                }
-                res();
-            }
-        };
-    });
+        const inputDificulade = document.getElementById("escolhadificuldade");
+        // inputDificulade.onkeyup = (event) => {
+        // if (event.key.toLowerCase() === "enter") {
+        if (inputDificulade.value == 1) {
+            URL_BASE + "easy"
+            console.log(URL_BASE)
+        } else if (inputDificulade.value == 2) {
+            URL_BASE + "medium";
+            console.log(URL_BASE)
+        } else {
+            URL_BASE + "hard";
+            console.log(URL_BASE)
+        }
+        res();
+    }
+        // };}
+    );
     triviaElement.innerHTML = '';
     await fetchTrivia(URL_BASE);
 }
@@ -60,18 +63,18 @@ const fetchTrivia = async (url) => {
     try {
         let data = await fetch(url);
         data = await data.json();
-        
+
         triviaElement.innerHTML = '';
-        
+
         for (const question of data.results.values()) {
             const questionElement = document.createElement('div');
             questionElement.innerHTML = `<h3>${await traslateText(decodeURIComponent(question.question))}</h3>`;
             triviaElement.appendChild(questionElement);
-            
+
             const answerElement = document.createElement('div');
             const allAnswers = [...question.incorrect_answers, question.correct_answer];
             allAnswers.sort();
-            
+
             for (let answer of allAnswers) {
                 const buttonElement = document.createElement('button');
                 buttonElement.innerText = await traslateText(decodeURIComponent(answer));
@@ -92,8 +95,8 @@ const fetchTrivia = async (url) => {
                 const allButons = answerElement.querySelectorAll('button');
                 allButons.forEach((b) => b.addEventListener('click', (e) => {
                     console.log(e);
-                    
-                    if(b.innerText === translatedRightAnswer) {
+
+                    if (b.innerText === translatedRightAnswer) {
                         alert("Correto");
                         correctAnswer++;
                     } else {
@@ -106,12 +109,12 @@ const fetchTrivia = async (url) => {
         }
 
         const resultElement = document.createElement('div');
-        resultElement.innerHTML = `<h4>Você acertou ${correctAnswer}/5! </h4>`;  
-        triviaElement.appendChild(resultElement); 
-        
+        resultElement.innerHTML = `<h4>Você acertou ${correctAnswer}/5! </h4>`;
+        triviaElement.appendChild(resultElement);
+
     } catch (error) {
-        console.error('Error fetching trivia: ', error) ;
+        console.error('Error fetching trivia: ', error);
         // fetchTrivia(url);       
     }
-} 
+}
 escolha()
