@@ -6,6 +6,11 @@
     font-family: "Stack Sans Notch", sans-serif;
 }
 
+body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #8e44ad, #2980b9);
+}
+
 button {
     background-color: red;
     color: white;
@@ -24,14 +29,10 @@ button:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(180deg, #8e44ad, #2980b9);
-}
-
 h1 {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 15px 0 15px 0;
 }
 
@@ -43,7 +44,7 @@ h1 {
     gap: 15px;
 }
 
-.trivia-button {
+/* .trivia-button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -52,7 +53,7 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-}
+} */
 
 img {
     border-radius: 10px;
