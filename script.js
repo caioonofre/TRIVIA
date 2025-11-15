@@ -30,15 +30,15 @@ const escolhaDificuldade = async () => {
         // if (event.key.toLowerCase() === "enter") {
         if (inputDificulade.value == 1) {
             const difficulty = "easy";
-            URL_BASE + difficulty;
+            URL_BASE += difficulty;
             console.log(URL_BASE);
         } else if (inputDificulade.value == 2) {
             const difficulty = "medium";
-            URL_BASE + difficulty;
+            URL_BASE += difficulty;
             console.log(URL_BASE);
         } else {
             const difficulty = "hard";
-            URL_BASE + difficulty;
+            URL_BASE += difficulty;
             console.log(URL_BASE);
         }
         res();
@@ -127,7 +127,7 @@ const fetchTrivia = async (url) => {
         const gatosilencio = document.createElement('img');
         gatosilencio.src = "gatosilencio.jpg"
         gatosilencio.alt = 'gato xiu';
-        gatosilencio.width = 500;
+        gatosilencio.width = 300;
         triviaElement.appendChild(resultElement);
         triviaElement.appendChild(gatosilencio);
         
